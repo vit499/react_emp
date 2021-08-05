@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  front1:
+    build:
+      dockerfile: Dockerfile
+      context: ./front1
+    container_name: front-vv1
+    restart: unless-stopped
+    command: serve -s build -l 3001
+    networks:
+      - vv-network
+
+  front2:
+    build:
+      dockerfile: Dockerfile
+      context: ./front2
+    container_name: front-vv2
+    restart: unless-stopped
+    command: serve -s build -l 3002
+    networks:
+      - vv-network
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: vv-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/vv1.conf:/etc/nginx/conf.d/vv1.conf
+      - ./nginx/vv2.conf:/etc/nginx/conf.d/vv2.conf
+    depends_on:
+      - front1
+      - front2
+    networks:
+      - vv-network
+
+networks:
+  vv-network:
+    driver: bridge
