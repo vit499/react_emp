@@ -9,7 +9,7 @@ services:
     restart: unless-stopped
     command: serve -s build -l 3001
     networks:
-      - vv-network
+      - dock-vv-network # before run cmd:  docker network create dock-vv-network
 
   front2:
     build:
@@ -19,8 +19,8 @@ services:
     restart: unless-stopped
     command: serve -s build -l 3002
     networks:
-      - vv-network
+      - dock-vv-network
 
 networks:
-  vv-network:
-    driver: bridge
+  dock-vv-network:
+    external: true

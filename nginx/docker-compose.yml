@@ -7,14 +7,12 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./nginx/vv1.conf:/etc/nginx/conf.d/vv1.conf
-      - ./nginx/vv2.conf:/etc/nginx/conf.d/vv2.conf
-    depends_on:
-      - front1
-      - front2
+      - ./vv1.conf:/etc/nginx/conf.d/vv1.conf
+      - ./vv2.conf:/etc/nginx/conf.d/vv2.conf
+    restart: unless-stopped
     networks:
-      - vv-network
+      - dock-vv-network
 
 networks:
-  vv-network:
-    driver: bridge
+  dock-vv-network:
+    external: true
