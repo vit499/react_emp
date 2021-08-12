@@ -21,6 +21,16 @@ services:
     networks:
       - dock-vv-network
 
+  front11:
+    build:
+      dockerfile: Dockerfile
+      context: ./front11
+    container_name: front-vv11
+    restart: unless-stopped
+    command: serve -s build -l 3003
+    networks:
+      - dock-vv-network
+
 networks:
   dock-vv-network:
     external: true

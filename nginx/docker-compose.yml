@@ -9,6 +9,7 @@ services:
     volumes:
       - ./vv1.conf:/etc/nginx/conf.d/vv1.conf
       - ./vv2.conf:/etc/nginx/conf.d/vv2.conf
+      - ./vv11.conf:/etc/nginx/conf.d/vv11.conf
     restart: unless-stopped
     networks:
       - dock-vv-network
